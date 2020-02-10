@@ -17,7 +17,6 @@ namespace ClientLib
         {
             HandShake();
             WriteString(text + Environment.NewLine);
-            //The trailing new line does not come back from the server.
             string ret = ReadString(text.Length + 1);
             return ret;
         }

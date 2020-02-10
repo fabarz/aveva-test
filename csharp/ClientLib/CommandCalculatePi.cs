@@ -19,23 +19,12 @@ namespace ClientLib
             {
                 throw new ArgumentException("Decimal Places must be bebetween 0 and 255.");
             }
+
             HandShake();
-            string ret = string.Empty;
-            byte[] msg = { (byte) nDecimalPlaces };
-            int i = Sock.Send(msg);
-            if (i != msg.Length)
-            {
-                throw Error($"Failed sending {msg.Length} bytes.");
-            }
-            do
-            {
-                i = Sock.Receive(msg);
-                if (i != 1)
-                {
-                    throw Error($"Failed receiving {msg.Length} bytes.");
-                }
-                ret += (char) msg[0];
-            } while (msg[0] != 10);
+
+            WriteByte((byte)nDecimalPlaces);
+
+            string ret = ReadString(2 + nDecimalPlaces + 1);
 
             return ret;
         }
