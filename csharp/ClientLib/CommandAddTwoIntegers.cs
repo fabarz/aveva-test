@@ -12,7 +12,8 @@ namespace ClientLib
     {
         private ushort val1, val2;
 
-        public CommandAddTwoIntegers(ITransportMedium medium, ushort value1, ushort value2): base(medium, 4)
+        public CommandAddTwoIntegers(ITransportMedium medium, ushort value1, ushort value2)
+            : base(medium, 4)
         {
             val1 = value1;
             val2 = value2;

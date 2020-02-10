@@ -9,16 +9,21 @@ using System.Threading.Tasks;
 
 namespace ClientLib
 {
+    /// <summary>
+    /// Base class of all the commands to the TCP/IP server.
+    /// </summary>
     public abstract class CommandBase: IWorkElement
     {
-        //TODO: Seperate Socket from Command. To be able to read and write to different medium.
-
         public string Host { get; private set; }
         public int Port { get; private set; }
         protected byte CommandType { get; set; }
-        protected ITransportMedium Medium { get; set; }
 
-        //IElement
+        /// <summary>
+        /// The transport medium for messages to the server.
+        /// </summary>
+        protected ITransportMedium Medium { get; set; }
+         
+        //IWorkElement interface members
         public Exception Error { get; set; }
         public string Result { get; protected set; }
         public object ResultContainer { get; set; }
@@ -33,6 +38,9 @@ namespace ClientLib
             Medium = medium;
         }
 
+        /// <summary>
+        /// Initial handshake with the server
+        /// </summary>
         public void HandShake()
         {
             Medium.WriteByte(CommandType);
@@ -44,7 +52,9 @@ namespace ClientLib
             }
         }
 
-        //IElement
+        /// <summary>
+        /// IWorkElement member
+        /// </summary>
         public void Execute()
         {
             try
@@ -58,6 +68,11 @@ namespace ClientLib
             }
         }
 
+        /// <summary>
+        /// Every command will do a different thing.
+        /// The implementation of specific command actions goes here.
+        /// </summary>
+        /// <returns></returns>
         protected virtual string ExecuteInternal()
         {
             throw new NotImplementedException();

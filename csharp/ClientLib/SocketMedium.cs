@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace ClientLib
 {
+    /// <summary>
+    /// An implementation of Transport Medium.
+    /// Messages from and to the server are send and received through this.
+    /// </summary>
     public class SocketMedium : ITransportMedium, IDisposable
     {
         private Socket sock;

@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace ClientLib
 {
+    /// <summary>
+    /// Transport medium used for communication.
+    /// We have only a socket currently.
+    /// But this can be another medium. For example CAN or BITBUS or others.
+    /// </summary>
     public interface ITransportMedium
     {
         bool Connected { get; }

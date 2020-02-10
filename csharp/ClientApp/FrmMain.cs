@@ -13,41 +13,50 @@ using System.Windows.Forms;
 
 namespace ClietApp
 {
+    /// <summary>
+    /// Main Form of the application.
+    /// </summary>
     public partial class FrmMain : Form
     {
+        /// <summary>
+        /// True when the user wants to close the application.
+        /// </summary>
         private bool closing = false;
         private ITransportMedium Medium = new SocketMedium();
-        private Worker worker;
-        private int count = 0;
+        private WorkerThread worker;
+
+        /// <summary>
+        /// Used to count the reverse string commands.
+        /// </summary>
+        private int countReverseStringCommands = 0;
 
         public FrmMain()
         {
             InitializeComponent();
 
-            worker = new Worker(Done);
+            worker = new WorkerThread(Done);
         }
 
+        /// <summary>
+        /// Called from different thread when an element's work is done.
+        /// </summary>
+        /// <param name="elem"></param>
         private void Done(IWorkElement elem)
         {
             if (closing) return;
-            InvShowError(elem.Error);
+            InvokeShowError(elem.Error);
             string res = elem.Error == null ? elem.Result : string.Empty;
-            if (elem.Error != null)
-            {
-                var x = (elem.ResultContainer as TextBox);
-                x.Invoke((Action)delegate {
-                    x.Text = res;
-                });
-            }
-            else
-            {
-                var x = (elem.ResultContainer as TextBox);
-                x.Invoke((Action)delegate {
-                    x.Text = res;
-                });
-            }
+            var textBox = (elem.ResultContainer as TextBox);
+            textBox.Invoke((Action)delegate {
+                textBox.Text = res;
+            });
         }
 
+        /// <summary>
+        /// Show error: Call from the main thread.
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <param name="showDialog"></param>
         public void ShowError(Exception ex, bool showDialog = true)
         {
             lblResultText.Text = ex.Message;
@@ -58,7 +67,11 @@ namespace ClietApp
             }
         }
 
-        public void InvShowError(Exception ex)
+        /// <summary>
+        /// InvokeShowError: Call from worker thread.
+        /// </summary>
+        /// <param name="ex"></param>
+        public void InvokeShowError(Exception ex)
         {
             lblResult.Invoke((Action)delegate {
                 if (ex != null)
@@ -80,15 +93,20 @@ namespace ClietApp
             lblResultText.ForeColor = Color.Black;
         }
 
+        /// <summary>
+        /// Command 1 Reverse String.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExecute1_Click(object sender, EventArgs e)
         {
             try
             {
-                count++;
                 string param = tbString.Text;
                 if (chbAddNum.Checked)
                 {
-                    param += " - " + count.ToString();
+                    param += " - " + countReverseStringCommands.ToString();
+                    countReverseStringCommands++;
                 }
                 CommandReverseString crs = new CommandReverseString(Medium, param);
                 crs.ResultContainer = tbResult1;
@@ -100,6 +118,10 @@ namespace ClietApp
             }
         }
 
+        /// <summary>
+        /// Async command execution.
+        /// </summary>
+        /// <param name="elem"></param>
         private void RunCommandAsync(IWorkElement elem)
         {
             (elem.ResultContainer as TextBox).Text = string.Empty;
@@ -107,7 +129,12 @@ namespace ClietApp
             worker.AddWork(elem);
         }
 
-        private void RunCommandSync(IWorkElement elem)
+        /// <summary>
+        /// Synchronous command execution.
+        /// This is not used. It blocks the GUI.
+        /// </summary>
+        /// <param name="elem"></param>
+        private void RunCommand(IWorkElement elem)
         {
             (elem.ResultContainer as TextBox).Text = string.Empty;
             ClearError();
@@ -123,6 +150,13 @@ namespace ClietApp
             }
         }
 
+
+        /// <summary>
+        /// Custom methos used to reverse an UINT32.
+        /// This is an example of passing an algorithm to be used by the command handler.
+        /// </summary>
+        /// <param name="hostOrder"></param>
+        /// <returns></returns>
         private static uint ReverseUInt32(uint hostOrder)
         {
             byte[] hostBytes = BitConverter.GetBytes(hostOrder);
@@ -131,6 +165,11 @@ namespace ClietApp
             return res;
         }
 
+        /// <summary>
+        /// Command 2: Reverse Integer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExecute2_Click(object sender, EventArgs e)
         {
             try
@@ -145,6 +184,11 @@ namespace ClietApp
             }
         }
 
+        /// <summary>
+        /// Command 3: Calculate PI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExecute3_Click(object sender, EventArgs e)
         {
             try
@@ -159,6 +203,11 @@ namespace ClietApp
             }
         }
 
+        /// <summary>
+        /// Command 4: Add Two Integers
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExecute4_Click(object sender, EventArgs e)
         {
             try
@@ -173,6 +222,11 @@ namespace ClietApp
             }
         }
 
+        /// <summary>
+        /// Connects the socket to the server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConnect_Click(object sender, EventArgs e)
         {
             try
@@ -194,12 +248,26 @@ namespace ClietApp
             }
         }
 
+        /// <summary>
+        /// The user wants to exit the application.
+        /// Signal the worker and wait for it's exit.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //Signal the worker to stop.
             closing = true;
+
+            //This will block until the worker exits.
             worker.Stop();
         }
 
+        /// <summary>
+        /// Updates the progress bar periodically.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tmrProgressUpdater_Tick(object sender, EventArgs e)
         {
             pb1.Value = worker.GetQueueSize();

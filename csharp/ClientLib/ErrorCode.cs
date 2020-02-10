@@ -2,6 +2,9 @@
 
 namespace ClientLib
 {
+    /// <summary>
+    /// Handles error code parsing.
+    /// </summary>
     internal class ErrorCode
     {
         public bool ErrorBit { get; private set; }
