@@ -88,12 +88,20 @@ namespace ClientLib
         public void WriteUInt16(ushort val)
         {
             //short sval1 = IPAddress.HostToNetworkOrder((short) val1);
+            //TODO: Why is the above not necessary
             byte[] msg = BitConverter.GetBytes(val);
             int i = Sock.Send(msg);
             if (i != 2)
             {
                 throw Error("Failed sending 2 bytes.");
             }
+        }
+
+        public void WriteUInt32(uint val)
+        {
+            int val1 = IPAddress.HostToNetworkOrder((int)val);
+            byte[] msg = BitConverter.GetBytes(val1);
+            WriteBytes(msg);
         }
 
         public uint ReadUInt32()
@@ -104,10 +112,9 @@ namespace ClientLib
             return (uint)hostRet;
         }
 
-        public void WriteUInt32(uint val)
+        public void WriteString(string text)
         {
-            int val1 = IPAddress.HostToNetworkOrder((int) val);
-            byte[] msg = BitConverter.GetBytes(val1);
+            byte[] msg = Encoding.UTF8.GetBytes(text);
             WriteBytes(msg);
         }
 
@@ -116,12 +123,6 @@ namespace ClientLib
             byte[] msg = ReadBytes(length);
             return Encoding.UTF8.GetString(msg);
         }
-
-        public void WriteString(string text)
-        {
-            byte[] msg = Encoding.UTF8.GetBytes(text);
-            WriteBytes(msg);
-        }        
 
         protected CommunicationException Error(string msg)
         {
