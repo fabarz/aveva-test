@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BackgWorker;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,21 +10,24 @@ namespace ClientLib
 {
     public class CommandAddTwoIntegers : CommandBase
     {
-        public CommandAddTwoIntegers(): base(4)
-        {
+        private ushort val1, val2;
 
+        public CommandAddTwoIntegers(ITransportMedium medium, ushort value1, ushort value2): base(medium, 4)
+        {
+            val1 = value1;
+            val2 = value2;
         }
 
-        public uint Execute(ushort val1, ushort val2)
+        protected override string ExecuteInternal()
         {
             HandShake();
 
-            WriteUInt16(val1);
-            WriteUInt16(val2);
+            Medium.WriteUInt16(val1);
+            Medium.WriteUInt16(val2);
 
-            uint res = ReadUInt32();
+            uint res = Medium.ReadUInt32();
 
-            return res;
+            return res.ToString();
         }
     }
 }

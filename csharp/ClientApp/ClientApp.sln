@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientApp", "ClientApp.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientLib", "..\ClientLib\ClientLib.csproj", "{1B214CFC-CB0E-4590-96FF-4D36C35233E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgWorker", "..\BackgWorker\BackgWorker.csproj", "{ECAE6E46-0A3A-4131-AC09-C7041D65868E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1B214CFC-CB0E-4590-96FF-4D36C35233E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B214CFC-CB0E-4590-96FF-4D36C35233E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B214CFC-CB0E-4590-96FF-4D36C35233E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECAE6E46-0A3A-4131-AC09-C7041D65868E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECAE6E46-0A3A-4131-AC09-C7041D65868E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECAE6E46-0A3A-4131-AC09-C7041D65868E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECAE6E46-0A3A-4131-AC09-C7041D65868E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

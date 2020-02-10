@@ -80,6 +80,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BackgWorker\BackgWorker.csproj">
+      <Project>{ECAE6E46-0A3A-4131-AC09-C7041D65868E}</Project>
+      <Name>BackgWorker</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClientLib\ClientLib.csproj">
       <Project>{1b214cfc-cb0e-4590-96ff-4d36c35233e4}</Project>
       <Name>ClientLib</Name>

@@ -6,3 +6,7 @@ csharp/ClientApp/.vs/
 csharp/ClientLib/bin/
 csharp/ClientLib/obj/
 csharp/ClientLib/.vs/
+
+csharp/BackgWorker/bin/
+csharp/BackgWorker/obj/
+csharp/BackgWorker/.vs/

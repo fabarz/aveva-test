@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BackgWorker;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,33 +10,27 @@ namespace ClientLib
 {
     public class CommandReverseInteger : CommandBase
     {
-        public CommandReverseInteger(): base(2)
-        {
+        private Func<uint, uint> ReverseFunction { get; set; }
 
+        public CommandReverseInteger(ITransportMedium medium, Func<uint, uint> reverseFunction): base(medium, 2)
+        {
+            ReverseFunction = reverseFunction;
         }
 
-        public string Execute()
+        protected override string ExecuteInternal()
         {
             HandShake();
 
-            uint val = ReadUInt32();
-            uint calc = ReverseUInt32(val);
-            WriteUInt32(calc);
+            uint val = Medium.ReadUInt32();
+            uint calc = ReverseFunction(val);
+            Medium.WriteUInt32(calc);
 
-            byte result = ReadByte();
+            byte result = Medium.ReadByte();
 
             string ret = "Received: 0x" + val.ToString("X") 
                 + " Sent: 0x" + calc.ToString("X") 
                 + " Result: 0x" + result.ToString("X");
             return ret;
-        }
-
-        private static uint ReverseUInt32(uint hostOrder)
-        {
-            byte[] hostBytes = BitConverter.GetBytes(hostOrder);
-            Array.Reverse(hostBytes);
-            uint res = BitConverter.ToUInt32(hostBytes, 0);
-            return res;
         }
     }
 }

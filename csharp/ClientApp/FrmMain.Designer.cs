@@ -28,13 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlTop = new System.Windows.Forms.Panel();
-            this.btnTest = new System.Windows.Forms.Button();
+            this.btnConnect = new System.Windows.Forms.Button();
             this.lblPort = new System.Windows.Forms.Label();
             this.lblHost = new System.Windows.Forms.Label();
             this.nudPort = new System.Windows.Forms.NumericUpDown();
             this.tbHost = new System.Windows.Forms.TextBox();
             this.pnlBottom = new System.Windows.Forms.Panel();
+            this.lblResultText = new System.Windows.Forms.Label();
+            this.lblRes = new System.Windows.Forms.Label();
             this.rtbLog = new System.Windows.Forms.RichTextBox();
             this.pnlMiddle = new System.Windows.Forms.Panel();
             this.tpCalculatePi = new System.Windows.Forms.TabControl();
@@ -45,25 +48,26 @@
             this.lblString = new System.Windows.Forms.Label();
             this.tbString = new System.Windows.Forms.TextBox();
             this.tpReverseInteger = new System.Windows.Forms.TabPage();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tpAddTwoIntegers = new System.Windows.Forms.TabPage();
-            this.btnExecute2 = new System.Windows.Forms.Button();
-            this.tbResult2 = new System.Windows.Forms.TextBox();
             this.lblRet = new System.Windows.Forms.Label();
-            this.nudNDecimalPlaces = new System.Windows.Forms.NumericUpDown();
-            this.lblNDecPlaces = new System.Windows.Forms.Label();
-            this.btnExecute3 = new System.Windows.Forms.Button();
-            this.tbResult3 = new System.Windows.Forms.TextBox();
+            this.tbResult2 = new System.Windows.Forms.TextBox();
+            this.btnExecute2 = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.lblResult3 = new System.Windows.Forms.Label();
-            this.nudVal1 = new System.Windows.Forms.NumericUpDown();
-            this.lblVal1 = new System.Windows.Forms.Label();
+            this.tbResult3 = new System.Windows.Forms.TextBox();
+            this.btnExecute3 = new System.Windows.Forms.Button();
+            this.lblNDecPlaces = new System.Windows.Forms.Label();
+            this.nudNDecimalPlaces = new System.Windows.Forms.NumericUpDown();
+            this.tpAddTwoIntegers = new System.Windows.Forms.TabPage();
+            this.lblResult4 = new System.Windows.Forms.Label();
+            this.tbResult4 = new System.Windows.Forms.TextBox();
+            this.btnExecute4 = new System.Windows.Forms.Button();
             this.lblVal2 = new System.Windows.Forms.Label();
             this.nudVal2 = new System.Windows.Forms.NumericUpDown();
-            this.btnExecute4 = new System.Windows.Forms.Button();
-            this.tbResult4 = new System.Windows.Forms.TextBox();
-            this.lblResult4 = new System.Windows.Forms.Label();
-            this.lblRes = new System.Windows.Forms.Label();
-            this.lblResultText = new System.Windows.Forms.Label();
+            this.lblVal1 = new System.Windows.Forms.Label();
+            this.nudVal1 = new System.Windows.Forms.NumericUpDown();
+            this.chbAddNum = new System.Windows.Forms.CheckBox();
+            this.pb1 = new System.Windows.Forms.ProgressBar();
+            this.tmrProgressUpdater = new System.Windows.Forms.Timer(this.components);
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPort)).BeginInit();
             this.pnlBottom.SuspendLayout();
@@ -72,15 +76,15 @@
             this.tpReverseString.SuspendLayout();
             this.tpReverseInteger.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tpAddTwoIntegers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudNDecimalPlaces)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudVal1)).BeginInit();
+            this.tpAddTwoIntegers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudVal2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudVal1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTop
             // 
-            this.pnlTop.Controls.Add(this.btnTest);
+            this.pnlTop.Controls.Add(this.btnConnect);
             this.pnlTop.Controls.Add(this.lblPort);
             this.pnlTop.Controls.Add(this.lblHost);
             this.pnlTop.Controls.Add(this.nudPort);
@@ -91,15 +95,15 @@
             this.pnlTop.Size = new System.Drawing.Size(720, 88);
             this.pnlTop.TabIndex = 0;
             // 
-            // btnTest
+            // btnConnect
             // 
-            this.btnTest.Location = new System.Drawing.Point(558, 30);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 23);
-            this.btnTest.TabIndex = 4;
-            this.btnTest.Text = "Test";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            this.btnConnect.Location = new System.Drawing.Point(558, 30);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(75, 23);
+            this.btnConnect.TabIndex = 4;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // lblPort
             // 
@@ -146,6 +150,7 @@
             // 
             // pnlBottom
             // 
+            this.pnlBottom.Controls.Add(this.pb1);
             this.pnlBottom.Controls.Add(this.lblResultText);
             this.pnlBottom.Controls.Add(this.lblRes);
             this.pnlBottom.Controls.Add(this.rtbLog);
@@ -154,6 +159,24 @@
             this.pnlBottom.Name = "pnlBottom";
             this.pnlBottom.Size = new System.Drawing.Size(720, 100);
             this.pnlBottom.TabIndex = 1;
+            // 
+            // lblResultText
+            // 
+            this.lblResultText.AutoSize = true;
+            this.lblResultText.Location = new System.Drawing.Point(59, 13);
+            this.lblResultText.Name = "lblResultText";
+            this.lblResultText.Size = new System.Drawing.Size(11, 13);
+            this.lblResultText.TabIndex = 2;
+            this.lblResultText.Text = "-";
+            // 
+            // lblRes
+            // 
+            this.lblRes.AutoSize = true;
+            this.lblRes.Location = new System.Drawing.Point(12, 13);
+            this.lblRes.Name = "lblRes";
+            this.lblRes.Size = new System.Drawing.Size(41, 13);
+            this.lblRes.TabIndex = 1;
+            this.lblRes.Text = "Result:";
             // 
             // rtbLog
             // 
@@ -189,6 +212,7 @@
             // 
             // tpReverseString
             // 
+            this.tpReverseString.Controls.Add(this.chbAddNum);
             this.tpReverseString.Controls.Add(this.btnExecute1);
             this.tpReverseString.Controls.Add(this.lblResult);
             this.tpReverseString.Controls.Add(this.tbResult1);
@@ -259,6 +283,33 @@
             this.tpReverseInteger.Text = "2 - Reverse Integer";
             this.tpReverseInteger.UseVisualStyleBackColor = true;
             // 
+            // lblRet
+            // 
+            this.lblRet.AutoSize = true;
+            this.lblRet.Location = new System.Drawing.Point(34, 74);
+            this.lblRet.Name = "lblRet";
+            this.lblRet.Size = new System.Drawing.Size(41, 13);
+            this.lblRet.TabIndex = 7;
+            this.lblRet.Text = "Result:";
+            // 
+            // tbResult2
+            // 
+            this.tbResult2.Location = new System.Drawing.Point(85, 68);
+            this.tbResult2.Name = "tbResult2";
+            this.tbResult2.ReadOnly = true;
+            this.tbResult2.Size = new System.Drawing.Size(587, 20);
+            this.tbResult2.TabIndex = 6;
+            // 
+            // btnExecute2
+            // 
+            this.btnExecute2.Location = new System.Drawing.Point(25, 24);
+            this.btnExecute2.Name = "btnExecute2";
+            this.btnExecute2.Size = new System.Drawing.Size(75, 23);
+            this.btnExecute2.TabIndex = 5;
+            this.btnExecute2.Text = "Execute";
+            this.btnExecute2.UseVisualStyleBackColor = true;
+            this.btnExecute2.Click += new System.EventHandler(this.btnExecute2_Click);
+            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.lblResult3);
@@ -274,49 +325,41 @@
             this.tabPage1.Text = "3 - Calculate PI";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tpAddTwoIntegers
+            // lblResult3
             // 
-            this.tpAddTwoIntegers.Controls.Add(this.lblResult4);
-            this.tpAddTwoIntegers.Controls.Add(this.tbResult4);
-            this.tpAddTwoIntegers.Controls.Add(this.btnExecute4);
-            this.tpAddTwoIntegers.Controls.Add(this.lblVal2);
-            this.tpAddTwoIntegers.Controls.Add(this.nudVal2);
-            this.tpAddTwoIntegers.Controls.Add(this.lblVal1);
-            this.tpAddTwoIntegers.Controls.Add(this.nudVal1);
-            this.tpAddTwoIntegers.Location = new System.Drawing.Point(4, 22);
-            this.tpAddTwoIntegers.Name = "tpAddTwoIntegers";
-            this.tpAddTwoIntegers.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAddTwoIntegers.Size = new System.Drawing.Size(712, 231);
-            this.tpAddTwoIntegers.TabIndex = 3;
-            this.tpAddTwoIntegers.Text = "4 - Add Two Integers";
-            this.tpAddTwoIntegers.UseVisualStyleBackColor = true;
+            this.lblResult3.AutoSize = true;
+            this.lblResult3.Location = new System.Drawing.Point(38, 132);
+            this.lblResult3.Name = "lblResult3";
+            this.lblResult3.Size = new System.Drawing.Size(41, 13);
+            this.lblResult3.TabIndex = 4;
+            this.lblResult3.Text = "Result:";
             // 
-            // btnExecute2
+            // tbResult3
             // 
-            this.btnExecute2.Location = new System.Drawing.Point(25, 24);
-            this.btnExecute2.Name = "btnExecute2";
-            this.btnExecute2.Size = new System.Drawing.Size(75, 23);
-            this.btnExecute2.TabIndex = 5;
-            this.btnExecute2.Text = "Execute";
-            this.btnExecute2.UseVisualStyleBackColor = true;
-            this.btnExecute2.Click += new System.EventHandler(this.btnExecute2_Click);
+            this.tbResult3.Location = new System.Drawing.Point(132, 125);
+            this.tbResult3.Name = "tbResult3";
+            this.tbResult3.ReadOnly = true;
+            this.tbResult3.Size = new System.Drawing.Size(523, 20);
+            this.tbResult3.TabIndex = 3;
             // 
-            // tbResult2
+            // btnExecute3
             // 
-            this.tbResult2.Location = new System.Drawing.Point(85, 68);
-            this.tbResult2.Name = "tbResult2";
-            this.tbResult2.ReadOnly = true;
-            this.tbResult2.Size = new System.Drawing.Size(587, 20);
-            this.tbResult2.TabIndex = 6;
+            this.btnExecute3.Location = new System.Drawing.Point(99, 68);
+            this.btnExecute3.Name = "btnExecute3";
+            this.btnExecute3.Size = new System.Drawing.Size(75, 23);
+            this.btnExecute3.TabIndex = 2;
+            this.btnExecute3.Text = "Execute";
+            this.btnExecute3.UseVisualStyleBackColor = true;
+            this.btnExecute3.Click += new System.EventHandler(this.btnExecute3_Click);
             // 
-            // lblRet
+            // lblNDecPlaces
             // 
-            this.lblRet.AutoSize = true;
-            this.lblRet.Location = new System.Drawing.Point(34, 74);
-            this.lblRet.Name = "lblRet";
-            this.lblRet.Size = new System.Drawing.Size(41, 13);
-            this.lblRet.TabIndex = 7;
-            this.lblRet.Text = "Result:";
+            this.lblNDecPlaces.AutoSize = true;
+            this.lblNDecPlaces.Location = new System.Drawing.Point(38, 28);
+            this.lblNDecPlaces.Name = "lblNDecPlaces";
+            this.lblNDecPlaces.Size = new System.Drawing.Size(88, 13);
+            this.lblNDecPlaces.TabIndex = 1;
+            this.lblNDecPlaces.Text = "#Decimal Places:";
             // 
             // nudNDecimalPlaces
             // 
@@ -335,67 +378,49 @@
             0,
             0});
             // 
-            // lblNDecPlaces
+            // tpAddTwoIntegers
             // 
-            this.lblNDecPlaces.AutoSize = true;
-            this.lblNDecPlaces.Location = new System.Drawing.Point(38, 28);
-            this.lblNDecPlaces.Name = "lblNDecPlaces";
-            this.lblNDecPlaces.Size = new System.Drawing.Size(88, 13);
-            this.lblNDecPlaces.TabIndex = 1;
-            this.lblNDecPlaces.Text = "#Decimal Places:";
+            this.tpAddTwoIntegers.Controls.Add(this.lblResult4);
+            this.tpAddTwoIntegers.Controls.Add(this.tbResult4);
+            this.tpAddTwoIntegers.Controls.Add(this.btnExecute4);
+            this.tpAddTwoIntegers.Controls.Add(this.lblVal2);
+            this.tpAddTwoIntegers.Controls.Add(this.nudVal2);
+            this.tpAddTwoIntegers.Controls.Add(this.lblVal1);
+            this.tpAddTwoIntegers.Controls.Add(this.nudVal1);
+            this.tpAddTwoIntegers.Location = new System.Drawing.Point(4, 22);
+            this.tpAddTwoIntegers.Name = "tpAddTwoIntegers";
+            this.tpAddTwoIntegers.Padding = new System.Windows.Forms.Padding(3);
+            this.tpAddTwoIntegers.Size = new System.Drawing.Size(712, 231);
+            this.tpAddTwoIntegers.TabIndex = 3;
+            this.tpAddTwoIntegers.Text = "4 - Add Two Integers";
+            this.tpAddTwoIntegers.UseVisualStyleBackColor = true;
             // 
-            // btnExecute3
+            // lblResult4
             // 
-            this.btnExecute3.Location = new System.Drawing.Point(99, 68);
-            this.btnExecute3.Name = "btnExecute3";
-            this.btnExecute3.Size = new System.Drawing.Size(75, 23);
-            this.btnExecute3.TabIndex = 2;
-            this.btnExecute3.Text = "Execute";
-            this.btnExecute3.UseVisualStyleBackColor = true;
-            this.btnExecute3.Click += new System.EventHandler(this.btnExecute3_Click);
+            this.lblResult4.AutoSize = true;
+            this.lblResult4.Location = new System.Drawing.Point(39, 122);
+            this.lblResult4.Name = "lblResult4";
+            this.lblResult4.Size = new System.Drawing.Size(41, 13);
+            this.lblResult4.TabIndex = 6;
+            this.lblResult4.Text = "Result:";
             // 
-            // tbResult3
+            // tbResult4
             // 
-            this.tbResult3.Location = new System.Drawing.Point(132, 125);
-            this.tbResult3.Name = "tbResult3";
-            this.tbResult3.ReadOnly = true;
-            this.tbResult3.Size = new System.Drawing.Size(523, 20);
-            this.tbResult3.TabIndex = 3;
+            this.tbResult4.Location = new System.Drawing.Point(91, 119);
+            this.tbResult4.Name = "tbResult4";
+            this.tbResult4.ReadOnly = true;
+            this.tbResult4.Size = new System.Drawing.Size(251, 20);
+            this.tbResult4.TabIndex = 5;
             // 
-            // lblResult3
+            // btnExecute4
             // 
-            this.lblResult3.AutoSize = true;
-            this.lblResult3.Location = new System.Drawing.Point(38, 132);
-            this.lblResult3.Name = "lblResult3";
-            this.lblResult3.Size = new System.Drawing.Size(41, 13);
-            this.lblResult3.TabIndex = 4;
-            this.lblResult3.Text = "Result:";
-            // 
-            // nudVal1
-            // 
-            this.nudVal1.Location = new System.Drawing.Point(91, 33);
-            this.nudVal1.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.nudVal1.Name = "nudVal1";
-            this.nudVal1.Size = new System.Drawing.Size(120, 20);
-            this.nudVal1.TabIndex = 0;
-            this.nudVal1.Value = new decimal(new int[] {
-            144,
-            0,
-            0,
-            0});
-            // 
-            // lblVal1
-            // 
-            this.lblVal1.AutoSize = true;
-            this.lblVal1.Location = new System.Drawing.Point(39, 35);
-            this.lblVal1.Name = "lblVal1";
-            this.lblVal1.Size = new System.Drawing.Size(46, 13);
-            this.lblVal1.TabIndex = 1;
-            this.lblVal1.Text = "Value 1:";
+            this.btnExecute4.Location = new System.Drawing.Point(91, 76);
+            this.btnExecute4.Name = "btnExecute4";
+            this.btnExecute4.Size = new System.Drawing.Size(75, 23);
+            this.btnExecute4.TabIndex = 4;
+            this.btnExecute4.Text = "Execute";
+            this.btnExecute4.UseVisualStyleBackColor = true;
+            this.btnExecute4.Click += new System.EventHandler(this.btnExecute4_Click);
             // 
             // lblVal2
             // 
@@ -423,50 +448,57 @@
             0,
             0});
             // 
-            // btnExecute4
+            // lblVal1
             // 
-            this.btnExecute4.Location = new System.Drawing.Point(91, 76);
-            this.btnExecute4.Name = "btnExecute4";
-            this.btnExecute4.Size = new System.Drawing.Size(75, 23);
-            this.btnExecute4.TabIndex = 4;
-            this.btnExecute4.Text = "Execute";
-            this.btnExecute4.UseVisualStyleBackColor = true;
-            this.btnExecute4.Click += new System.EventHandler(this.btnExecute4_Click);
+            this.lblVal1.AutoSize = true;
+            this.lblVal1.Location = new System.Drawing.Point(39, 35);
+            this.lblVal1.Name = "lblVal1";
+            this.lblVal1.Size = new System.Drawing.Size(46, 13);
+            this.lblVal1.TabIndex = 1;
+            this.lblVal1.Text = "Value 1:";
             // 
-            // tbResult4
+            // nudVal1
             // 
-            this.tbResult4.Location = new System.Drawing.Point(91, 119);
-            this.tbResult4.Name = "tbResult4";
-            this.tbResult4.ReadOnly = true;
-            this.tbResult4.Size = new System.Drawing.Size(251, 20);
-            this.tbResult4.TabIndex = 5;
+            this.nudVal1.Location = new System.Drawing.Point(91, 33);
+            this.nudVal1.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.nudVal1.Name = "nudVal1";
+            this.nudVal1.Size = new System.Drawing.Size(120, 20);
+            this.nudVal1.TabIndex = 0;
+            this.nudVal1.Value = new decimal(new int[] {
+            144,
+            0,
+            0,
+            0});
             // 
-            // lblResult4
+            // chbAddNum
             // 
-            this.lblResult4.AutoSize = true;
-            this.lblResult4.Location = new System.Drawing.Point(39, 122);
-            this.lblResult4.Name = "lblResult4";
-            this.lblResult4.Size = new System.Drawing.Size(41, 13);
-            this.lblResult4.TabIndex = 6;
-            this.lblResult4.Text = "Result:";
+            this.chbAddNum.AutoSize = true;
+            this.chbAddNum.Checked = true;
+            this.chbAddNum.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbAddNum.Location = new System.Drawing.Point(117, 68);
+            this.chbAddNum.Name = "chbAddNum";
+            this.chbAddNum.Size = new System.Drawing.Size(120, 17);
+            this.chbAddNum.TabIndex = 5;
+            this.chbAddNum.Text = "Add number to text";
+            this.chbAddNum.UseVisualStyleBackColor = true;
             // 
-            // lblRes
+            // pb1
             // 
-            this.lblRes.AutoSize = true;
-            this.lblRes.Location = new System.Drawing.Point(12, 13);
-            this.lblRes.Name = "lblRes";
-            this.lblRes.Size = new System.Drawing.Size(41, 13);
-            this.lblRes.TabIndex = 1;
-            this.lblRes.Text = "Result:";
+            this.pb1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pb1.Location = new System.Drawing.Point(0, 77);
+            this.pb1.Maximum = 5;
+            this.pb1.Name = "pb1";
+            this.pb1.Size = new System.Drawing.Size(720, 23);
+            this.pb1.TabIndex = 3;
             // 
-            // lblResultText
+            // tmrProgressUpdater
             // 
-            this.lblResultText.AutoSize = true;
-            this.lblResultText.Location = new System.Drawing.Point(59, 13);
-            this.lblResultText.Name = "lblResultText";
-            this.lblResultText.Size = new System.Drawing.Size(11, 13);
-            this.lblResultText.TabIndex = 2;
-            this.lblResultText.Text = "-";
+            this.tmrProgressUpdater.Enabled = true;
+            this.tmrProgressUpdater.Tick += new System.EventHandler(this.tmrProgressUpdater_Tick);
             // 
             // FrmMain
             // 
@@ -478,6 +510,7 @@
             this.Controls.Add(this.pnlTop);
             this.Name = "FrmMain";
             this.Text = "Client Application";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPort)).EndInit();
@@ -491,11 +524,11 @@
             this.tpReverseInteger.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNDecimalPlaces)).EndInit();
             this.tpAddTwoIntegers.ResumeLayout(false);
             this.tpAddTwoIntegers.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudNDecimalPlaces)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudVal1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudVal2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudVal1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -509,7 +542,7 @@
         private System.Windows.Forms.Label lblHost;
         private System.Windows.Forms.NumericUpDown nudPort;
         private System.Windows.Forms.TextBox tbHost;
-        private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.TabControl tpCalculatePi;
         private System.Windows.Forms.TabPage tpReverseString;
         private System.Windows.Forms.TabPage tpReverseInteger;
@@ -538,6 +571,9 @@
         private System.Windows.Forms.NumericUpDown nudVal1;
         private System.Windows.Forms.Label lblResultText;
         private System.Windows.Forms.Label lblRes;
+        private System.Windows.Forms.CheckBox chbAddNum;
+        private System.Windows.Forms.ProgressBar pb1;
+        private System.Windows.Forms.Timer tmrProgressUpdater;
     }
 }
 
