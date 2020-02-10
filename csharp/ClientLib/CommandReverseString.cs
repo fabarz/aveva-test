@@ -16,21 +16,10 @@ namespace ClientLib
         public string Execute(string text)
         {
             HandShake();
-            byte[] msg = Encoding.UTF8.GetBytes(text + Environment.NewLine);
-            int i = Sock.Send(msg);
-            if (i != msg.Length)
-            {
-                throw Error($"Failed sending {msg.Length} bytes.");
-            }
-
+            WriteString(text + Environment.NewLine);
             //The trailing new line does not come back from the server.
-
-            i = Sock.Receive(msg, msg.Length - 1, System.Net.Sockets.SocketFlags.None);
-            if (i != msg.Length - 1)
-            {
-                throw Error($"Failed receiving {msg.Length - 1} bytes.");
-            }
-            return Encoding.UTF8.GetString(msg);
+            string ret = ReadString(text.Length + 1);
+            return ret;
         }
     }
 }

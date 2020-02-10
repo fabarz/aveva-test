@@ -98,16 +98,30 @@ namespace ClientLib
 
         public uint ReadUInt32()
         {
-            byte[] res = new byte[4];
-            int i = Sock.Receive(res);
-            if (i != 4)
-            {
-                throw Error("Did not receive 4 bytes.");
-            }
+            byte[] res = ReadBytes(4);
             int ret = BitConverter.ToInt32(res, 0);
             int hostRet = IPAddress.NetworkToHostOrder(ret);
             return (uint)hostRet;
         }
+
+        public void WriteUInt32(uint val)
+        {
+            int val1 = IPAddress.HostToNetworkOrder((int) val);
+            byte[] msg = BitConverter.GetBytes(val1);
+            WriteBytes(msg);
+        }
+
+        public string ReadString(int length)
+        {
+            byte[] msg = ReadBytes(length);
+            return Encoding.UTF8.GetString(msg);
+        }
+
+        public void WriteString(string text)
+        {
+            byte[] msg = Encoding.UTF8.GetBytes(text);
+            WriteBytes(msg);
+        }        
 
         protected CommunicationException Error(string msg)
         {

@@ -16,35 +16,18 @@ namespace ClientLib
 
         public string Execute()
         {
-            //Needs refactoring.
-
-            string ret = string.Empty;
             HandShake();
 
-            byte[] msg = ReadBytes(4);
-            ret += "Received: " + BitConverter.ToString(msg);
+            uint val = ReadUInt32();
+            uint calc = ReverseUInt32(val);
+            WriteUInt32(calc);
 
-            ReverseInteger(msg);
+            byte result = ReadByte();
 
-            WriteBytes(msg);
-            ret += " Sent: " + BitConverter.ToString(msg);
-
-            byte[] result = ReadBytes(1);
-
-            ret += " Result: " + BitConverter.ToString(result);
+            string ret = "Received: 0x" + val.ToString("X") 
+                + " Sent: 0x" + calc.ToString("X") 
+                + " Result: 0x" + result.ToString("X");
             return ret;
-        }
-
-        private void ReverseInteger(byte[] msg)
-        {
-            uint res = BitConverter.ToUInt32(msg, 0);
-            int hostOrder = IPAddress.NetworkToHostOrder((int) res);
-
-            res = ReverseUInt32((uint) hostOrder);
-
-            int netOrder = IPAddress.HostToNetworkOrder((int) res);
-            byte[] netBytes = BitConverter.GetBytes(netOrder);
-            Array.Copy(netBytes, 0, msg, 0, 4);
         }
 
         private static uint ReverseUInt32(uint hostOrder)
