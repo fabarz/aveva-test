@@ -16,21 +16,19 @@ namespace ClientLib
 
         public string Execute()
         {
+            //Needs refactoring.
+
             string ret = string.Empty;
             HandShake();
-            byte[] msg = new byte[4];
-            int i = Sock.Receive(msg);
-            if (i != 4)
-            {
-                throw Error("Did not receive 4 bytes.");
-            }
+
+            byte[] msg = ReadBytes(4);
             ret += "Received: " + BitConverter.ToString(msg);
 
 
             ReverseInteger(msg);
 
 
-            i = Sock.Send(msg);
+            int i = Sock.Send(msg);
             if (i != 4)
             {
                 throw Error("Could not send 4 bytes.");
@@ -51,9 +49,11 @@ namespace ClientLib
         {
             int res = BitConverter.ToInt32(msg, 0);
             int hostOrder = IPAddress.NetworkToHostOrder(res);
+
             byte[] hostBytes = BitConverter.GetBytes(hostOrder);
             Array.Reverse(hostBytes);
             res = BitConverter.ToInt32(hostBytes, 0);
+
             int netOrder = IPAddress.HostToNetworkOrder(res);
             byte[] netBytes = BitConverter.GetBytes(netOrder);
             Array.Copy(netBytes, 0, msg, 0, 4);

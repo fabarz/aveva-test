@@ -22,7 +22,10 @@ namespace ClientLib
             {
                 throw Error($"Failed sending {msg.Length} bytes.");
             }
-            i = Sock.Receive(msg);
+
+            //The trailing new line does not come back from the server.
+
+            i = Sock.Receive(msg, msg.Length - 1, System.Net.Sockets.SocketFlags.None);
             if (i != msg.Length - 1)
             {
                 throw Error($"Failed receiving {msg.Length - 1} bytes.");
