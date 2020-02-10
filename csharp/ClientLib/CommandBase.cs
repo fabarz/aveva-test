@@ -44,6 +44,15 @@ namespace ClientLib
             }
         }
 
+        public void WriteBytes(byte[] msg)
+        {
+            int i = Sock.Send(msg);
+            if (i != msg.Length)
+            {
+                throw Error($@"Could not send {msg.Length} bytes.");
+            }
+        }
+
         public byte[] ReadBytes(int num)
         {
             byte[] msg = new byte[num];

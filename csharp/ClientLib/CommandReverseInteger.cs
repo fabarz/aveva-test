@@ -24,22 +24,12 @@ namespace ClientLib
             byte[] msg = ReadBytes(4);
             ret += "Received: " + BitConverter.ToString(msg);
 
-
             ReverseInteger(msg);
 
-
-            int i = Sock.Send(msg);
-            if (i != 4)
-            {
-                throw Error("Could not send 4 bytes.");
-            }
+            WriteBytes(msg);
             ret += " Sent: " + BitConverter.ToString(msg);
-            byte[] result = { 0xff };
-            i = Sock.Receive(result);
-            if (i != 1)
-            {
-                throw Error("Did not receive 1 byte result.");
-            }
+
+            byte[] result = ReadBytes(1);
 
             ret += " Result: " + BitConverter.ToString(result);
             return ret;
@@ -47,16 +37,22 @@ namespace ClientLib
 
         private void ReverseInteger(byte[] msg)
         {
-            int res = BitConverter.ToInt32(msg, 0);
-            int hostOrder = IPAddress.NetworkToHostOrder(res);
+            uint res = BitConverter.ToUInt32(msg, 0);
+            int hostOrder = IPAddress.NetworkToHostOrder((int) res);
 
-            byte[] hostBytes = BitConverter.GetBytes(hostOrder);
-            Array.Reverse(hostBytes);
-            res = BitConverter.ToInt32(hostBytes, 0);
+            res = ReverseUInt32((uint) hostOrder);
 
-            int netOrder = IPAddress.HostToNetworkOrder(res);
+            int netOrder = IPAddress.HostToNetworkOrder((int) res);
             byte[] netBytes = BitConverter.GetBytes(netOrder);
             Array.Copy(netBytes, 0, msg, 0, 4);
+        }
+
+        private static uint ReverseUInt32(uint hostOrder)
+        {
+            byte[] hostBytes = BitConverter.GetBytes(hostOrder);
+            Array.Reverse(hostBytes);
+            uint res = BitConverter.ToUInt32(hostBytes, 0);
+            return res;
         }
     }
 }
