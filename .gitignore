@@ -1,4 +1,8 @@
-csharp/ClientApp/bin
-csharp/ClientApp/obj
-csharp/ClientLib/bin
-csharp/ClientLib/obj
+
+csharp/ClientApp/bin/
+csharp/ClientApp/obj/
+csharp/ClientApp/.vs/
+
+csharp/ClientLib/bin/
+csharp/ClientLib/obj/
+csharp/ClientLib/.vs/
