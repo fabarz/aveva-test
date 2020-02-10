@@ -10,6 +10,8 @@ namespace ClientLib
 {
     public class CommandBase: IDisposable
     {
+        //TODO: Seperate Socket from Command. To be able to read and write to different medium.
+
         public string Host { get; private set; }
         public int Port { get; private set; }
         protected byte CommandType { get; set; }
